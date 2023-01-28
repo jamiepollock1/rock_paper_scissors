@@ -16,18 +16,20 @@ function getComputerChoice(options) {
 // using the playerTurn and compTurn parameters
 
 function playRound(playerTurn, computerSelection) {
-const result = checkWinner(playerTurn,computerSelection);
-return checkWinner(playerTurn,computerSelection);
+return (checkWinner(playerTurn,computerSelection));
 }
 
 // This function checks who wins a round
 function checkWinner(playerTurn,computerSelection) {
     if (playerTurn === computerSelection) {
-        return "It's a tie!";
+        //console.log("It's a tie!");
+        return "tie";
     } else if (playerTurn === "rock" && computerSelection === "scissors" || playerTurn === "scissors" && computerSelection === "paper" || playerTurn === "paper" && computerSelection === "rock") {
-        return (`You win! ${playerTurn} beats ${computerSelection}`);
+        //console.log(`You win! ${playerTurn} beats ${computerSelection}`);
+        return "player";
     } else {
-        return `You lose! ${computerSelection} beats ${playerTurn}`;
+        //console.log(`You lose! ${computerSelection} beats ${playerTurn}`);
+        return "computer";
     }
 }
 
@@ -54,6 +56,9 @@ function getPlayerChoice() {
 
 function game() {
 
+    let playerScore = 0;
+    let computerScore = 0;
+
 
     for (let i = 0; i < 5; i++) {
         const computerSelection = getComputerChoice(options);
@@ -62,5 +67,32 @@ function game() {
         console.log(playerTurn);
         console.log(computerSelection);
         console.log(playRound(playerTurn,computerSelection));
-    }
+        console.log("------------");
+
+        if (checkWinner(playerTurn,computerSelection) == "player") {
+            playerScore++;
+        }
+        else if (checkWinner(playerTurn,computerSelection) == "computer") {
+            computerScore++;
+        }
+        else if (checkWinner(playerTurn,computerSelection) == "tie") {
+            playerScore++;
+            computerScore++;
+        }
 }
+
+console.log("Game Over, The Results Are In...");
+
+if (playerScore > computerScore) {
+    console.log("Player Wins!");
+}
+else if (playerScore == computerScore) {
+    console.log("Tie! Go Again!");
+}
+else if (playerScore < computerScore) {
+    console.Log("You Lose! Unlucky...");
+}
+
+}
+
+game()
